@@ -1,5 +1,3 @@
-package pckg;
-
 public class Bus {
 private String id;
 private Ticket [] passengers;
@@ -37,11 +35,11 @@ public void setPassengers(Ticket[] passengers) {
 	this.passengers = passengers;
 }
 public boolean addPassenger(Ticket T) {
-	if(passCount < passengers.length) {
+	if(T == null || passCount>= passengers.length) {
+		return false;}
 		passengers[passCount] = T.copy(); //composition
 	passCount++;
-	return true;}
-	return false;
+	return true;
 }
 public Ticket findTicket(String T) {
 	for(int i = 0; i < passCount; i++) {
@@ -53,12 +51,13 @@ public Ticket findTicket(String T) {
 }
 public boolean delete(String id){
 	for(int i = 0; i < passCount; i++) {
-	if(passengers[i].getId().equals(id)) {
-		passengers[i] = passengers[passCount-1];
-		passengers[passCount-1] = null;
+	if(passengers[i].getId().equalsIgnoreCase(id)) {
+		for(int j=i;j<passCount;j++)  
+		passengers[j] = passengers[j+1];
+		passengers[j-1]=null;
 		passCount--;
 		return true;
-	}
+	 }
 	}
 	return false;
 }
