@@ -1,33 +1,45 @@
-package pckg;
+package Project_phase1;
 
-public abstract class Ticket{
-protected double distance;
-protected String id;
-public Ticket(double distance,String code) {
-	this.distance = distance;
-	this.id = code;
-}
-public String getId() {
-	return id;
-}
-public void setId(String id) {
-	this.id = id;
-}
-public Ticket(Ticket T) {
-	this.setDistance(T.getDistance());
-	this.setId(T.getId());
-}
-public double getDistance() {
-	return distance;
-}
-public void setDistance(double distance) {
-	this.distance = distance;
-}
-
-public abstract Ticket copy();
-public abstract double rideCost(); 
-
-public String toString() {
-	return "Distance is " + distance + "Km \n" + "Ride cost is: " + rideCost() + " SAR";
-}
+public abstract class Ticket implements Trackable {
+    protected double travelDistance;
+    protected String ticketNumber;
+    private String bookingDate;
+    
+    public Ticket(double travelDistance, String ticketNumber, String bookingDate) {
+        this.travelDistance = travelDistance;
+        this.ticketNumber = ticketNumber;
+        this.bookingDate = bookingDate;
+    }
+    public String getId() {
+        return ticketNumber;
+    }
+    public void setId(String id) {
+        this.ticketNumber = id;
+    }
+    public Ticket(Ticket T) {
+        this.travelDistance = T.getDistance();
+        this.ticketNumber = T.getId();
+        this.bookingDate = T.getBookingDate();
+    }
+    public double getDistance() {
+        return travelDistance;
+    }
+    public void setDistance(double distance) {
+        this.travelDistance = distance;
+    }
+    public String getBookingDate() {
+        return bookingDate;
+    }
+    public void setBookingDate(String bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+    public abstract Ticket copy();
+    
+    public abstract double rideCost(); 
+    public String toString() {
+        return "Ticket No: " + ticketNumber + " | Date: " + bookingDate + "\nDistance is " + travelDistance + "Km \nRide cost is: " + rideCost() + " SAR";
+    }
+    public String getTrackingInfo() {
+        return "Tracking Ticket [" + ticketNumber + "] booked on: " + bookingDate;
+    }
 }
