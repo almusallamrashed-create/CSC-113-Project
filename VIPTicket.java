@@ -1,27 +1,25 @@
-package pckg;
+package Project_phase1;
 
 public class VIPTicket extends NormalTicket implements Discounts {
-	public VIPTicket(double distance, String id) {
-		super(distance,id);
+	public VIPTicket(double travelDistance, String ticketNumber, String bookingDate) {
+		super(travelDistance, ticketNumber, bookingDate);
 	}
 	public double rideCost() {
-		return distance*7.5*applyDiscount() ;
+		return travelDistance * 7.5 * applyDiscount();
 	}
 	public double applyDiscount() {
-		if(distance > 10) {
+		if(travelDistance > 10) {
 			return 0.8;
 		}
 		return 1;
 	}
 	@Override
 	public Ticket copy() {
-		return new VIPTicket(this.getDistance(),this.getId());
+		return new VIPTicket(this.getDistance(), this.getId(), this.getBookingDate());
 	}
 	public String toString() {
 		String s = "VIP ";
-		s+= super.toString();
+		s += super.toString();
 		return s;
 	}
-	}
-
-
+}
