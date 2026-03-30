@@ -1,4 +1,4 @@
-package pckg;
+package Project_phase1;
 
 public class BusCompany {
 	private String name;
@@ -11,7 +11,7 @@ public BusCompany(String name, int num) {
 }
 public boolean addBus(Bus B) {
 	if(busCount < busses.length) {
-		busses[busCount] = B; //aggregation
+		busses[busCount] = B; 
 		busCount++;
 		return true;
 	}
@@ -32,12 +32,14 @@ private Bus findBusRecursive(String id, int index) {
 }
 public boolean delete(String id){
 	for(int i = 0; i < busCount; i++) {
-	if(busses[i].getId().equals(id)) {
-		busses[i] = busses[busCount-1];
-		busses[busCount-1] = null;
-		busCount--;
-		return true;
-	}
+		if(busses[i].getId().equals(id)) {
+			for(int j = i; j < busCount - 1; j++) {
+				busses[j] = busses[j+1];
+			}
+			busses[busCount-1] = null;
+			busCount--;
+			return true;
+		}
 	}
 	return false;
 }
