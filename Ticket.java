@@ -1,25 +1,31 @@
 package Project_phase1;
 
+// abstract class for all ticket types
 public abstract class Ticket implements Trackable {
     protected double travelDistance;
     protected String ticketNumber;
-    private String bookingDate;
+    private String bookingDate; // date of the booking
     
+    // constructor
     public Ticket(double travelDistance, String ticketNumber, String bookingDate) {
         this.travelDistance = travelDistance;
         this.ticketNumber = ticketNumber;
         this.bookingDate = bookingDate;
     }
+    
+    // copy constructor
+    public Ticket(Ticket t) {
+        this.travelDistance = t.getDistance();
+        this.ticketNumber = t.getId();
+        this.bookingDate = t.getBookingDate();
+    }
+    
+    // getters and setters
     public String getId() {
         return ticketNumber;
     }
     public void setId(String id) {
         this.ticketNumber = id;
-    }
-    public Ticket(Ticket T) {
-        this.travelDistance = T.getDistance();
-        this.ticketNumber = T.getId();
-        this.bookingDate = T.getBookingDate();
     }
     public double getDistance() {
         return travelDistance;
@@ -33,8 +39,21 @@ public abstract class Ticket implements Trackable {
     public void setBookingDate(String bookingDate) {
         this.bookingDate = bookingDate;
     }
-    public abstract Ticket copy();
     
+    // abstract methods
+    public abstract Ticket copy();
+    public abstract double rideCost(); 
+    
+    // print ticket info
+    public String toString() {
+        return "Ticket No: " + ticketNumber + " | Date: " + bookingDate + "\nDistance is " + travelDistance + "Km \nRide cost is: " + rideCost() + " SAR";
+    }
+    
+    // from Trackable interface
+    public String getTrackingInfo() {
+        return "Tracking Ticket [" + ticketNumber + "] booked on: " + bookingDate;
+    }
+}    
     public abstract double rideCost(); 
     public String toString() {
         return "Ticket No: " + ticketNumber + " | Date: " + bookingDate + "\nDistance is " + travelDistance + "Km \nRide cost is: " + rideCost() + " SAR";
